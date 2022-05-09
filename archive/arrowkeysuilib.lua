@@ -1,5 +1,5 @@
 --credits Blissful4992
-for i,v in pairs(_G) do
+for i,v in pairs(getgenv()) do
     if tostring(i) == "Layout" and #v ~= 0 then
         return
     end
@@ -130,11 +130,11 @@ local ContextActionService = game:GetService("ContextActionService")
 
 ContextActionService:BindActionAtPriority("DisableArrowKeys", function() return Enum.ContextActionResult.Sink end, false, Enum.ContextActionPriority.High.Value, unpack(Keys))
 
-local DESTROY_GUI = false
+local DESTROYgetgenv()UI = false
 
-_G["Layout"] = {}
+getgenv()["Layout"] = {}
 
-_G["Theme"] = { 
+getgenv()["Theme"] = { 
     ["UI_Position"] = v2(100, 100),
     ["Text_Size"] = 16,
 
@@ -150,54 +150,54 @@ _G["Theme"] = {
 }
 
 local function GetNewYCoord()
-    local y = _G["Theme"]["UI_Position"].Y
-    for i,v in pairs(_G["Layout"]) do
+    local y = getgenv()["Theme"]["UI_Position"].Y
+    for i,v in pairs(getgenv()["Layout"]) do
         y = y + v["Drawings"]["Main"].Size.Y
     end
     return y
 end
 
 local selected = 1
-local n = #_G["Layout"]
+local n = #getgenv()["Layout"]
 
 local Library = {}
 function Library:UpdateTheme()
-    for i = 1, #_G["Layout"] do
-        local v = _G["Layout"][i]
+    for i = 1, #getgenv()["Layout"] do
+        local v = getgenv()["Layout"][i]
         if i == selected then
             if v["Type"] == "Category" then
-                v["Drawings"]["Main"].Color = _G["Theme"]["Category_Back"]
-                v["Drawings"]["Main"].Transparency = _G["Theme"]["Category_Back_Transparency"]
-                v["Drawings"]["Text"].Color = _G["Theme"]["Selected_Color"]
-                v["Drawings"]["Text"].Size = _G["Theme"]["Text_Size"]
+                v["Drawings"]["Main"].Color = getgenv()["Theme"]["Category_Back"]
+                v["Drawings"]["Main"].Transparency = getgenv()["Theme"]["Category_Back_Transparency"]
+                v["Drawings"]["Text"].Color = getgenv()["Theme"]["Selected_Color"]
+                v["Drawings"]["Text"].Size = getgenv()["Theme"]["Text_Size"]
             else
-                v["Drawings"]["Main"].Color = _G["Theme"]["Option_Back"]
-                v["Drawings"]["Main"].Transparency = _G["Theme"]["Option_Back_Transparency"]
-                v["Drawings"]["Text"].Color = _G["Theme"]["Selected_Color"]
-                v["Drawings"]["Text"].Size = _G["Theme"]["Text_Size"]
+                v["Drawings"]["Main"].Color = getgenv()["Theme"]["Option_Back"]
+                v["Drawings"]["Main"].Transparency = getgenv()["Theme"]["Option_Back_Transparency"]
+                v["Drawings"]["Text"].Color = getgenv()["Theme"]["Selected_Color"]
+                v["Drawings"]["Text"].Size = getgenv()["Theme"]["Text_Size"]
                 if v["Type"] == "Toggle" or v["Type"] == "Slider" or v["Type"] == "Dropdown" or v["Type"] == "Colorpicker" or v["Type"] == "Keybind" then
-                    v["Drawings"]["Extra"]["Main"].Color = _G["Theme"]["Option_Back"]
-                    v["Drawings"]["Extra"]["Main"].Transparency = _G["Theme"]["Option_Back_Transparency"]
-                    v["Drawings"]["Extra"]["Text"].Color = _G["Theme"]["Selected_Color"]
-                    v["Drawings"]["Extra"]["Text"].Size = _G["Theme"]["Text_Size"]
+                    v["Drawings"]["Extra"]["Main"].Color = getgenv()["Theme"]["Option_Back"]
+                    v["Drawings"]["Extra"]["Main"].Transparency = getgenv()["Theme"]["Option_Back_Transparency"]
+                    v["Drawings"]["Extra"]["Text"].Color = getgenv()["Theme"]["Selected_Color"]
+                    v["Drawings"]["Extra"]["Text"].Size = getgenv()["Theme"]["Text_Size"]
                 end
             end
         else
             if v["Type"] == "Category" then
-                v["Drawings"]["Main"].Color = _G["Theme"]["Category_Back"]
-                v["Drawings"]["Main"].Transparency = _G["Theme"]["Category_Back_Transparency"]
-                v["Drawings"]["Text"].Color = _G["Theme"]["Category_Text"]
-                v["Drawings"]["Text"].Size = _G["Theme"]["Text_Size"]
+                v["Drawings"]["Main"].Color = getgenv()["Theme"]["Category_Back"]
+                v["Drawings"]["Main"].Transparency = getgenv()["Theme"]["Category_Back_Transparency"]
+                v["Drawings"]["Text"].Color = getgenv()["Theme"]["Category_Text"]
+                v["Drawings"]["Text"].Size = getgenv()["Theme"]["Text_Size"]
             else
-                v["Drawings"]["Main"].Color = _G["Theme"]["Option_Back"]
-                v["Drawings"]["Main"].Transparency = _G["Theme"]["Option_Back_Transparency"]
-                v["Drawings"]["Text"].Color = _G["Theme"]["Option_Text"]
-                v["Drawings"]["Text"].Size = _G["Theme"]["Text_Size"]
+                v["Drawings"]["Main"].Color = getgenv()["Theme"]["Option_Back"]
+                v["Drawings"]["Main"].Transparency = getgenv()["Theme"]["Option_Back_Transparency"]
+                v["Drawings"]["Text"].Color = getgenv()["Theme"]["Option_Text"]
+                v["Drawings"]["Text"].Size = getgenv()["Theme"]["Text_Size"]
                 if v["Type"] == "Toggle" or v["Type"] == "Slider" or v["Type"] == "Dropdown" or v["Type"] == "Colorpicker" or v["Type"] == "Keybind" then
-                    v["Drawings"]["Extra"]["Main"].Color = _G["Theme"]["Option_Back"]
-                    v["Drawings"]["Extra"]["Main"].Transparency = _G["Theme"]["Option_Back_Transparency"]
-                    v["Drawings"]["Extra"]["Text"].Color = _G["Theme"]["Option_Text"]
-                    v["Drawings"]["Extra"]["Text"].Size = _G["Theme"]["Text_Size"]
+                    v["Drawings"]["Extra"]["Main"].Color = getgenv()["Theme"]["Option_Back"]
+                    v["Drawings"]["Extra"]["Main"].Transparency = getgenv()["Theme"]["Option_Back_Transparency"]
+                    v["Drawings"]["Extra"]["Text"].Color = getgenv()["Theme"]["Option_Text"]
+                    v["Drawings"]["Extra"]["Text"].Size = getgenv()["Theme"]["Text_Size"]
                 end
             end
         end
@@ -207,8 +207,8 @@ end
 local active = true
 function Library:Toggle()
     active = not active
-    for i = 1, #_G["Layout"] do
-        local v = _G["Layout"][i]
+    for i = 1, #getgenv()["Layout"] do
+        local v = getgenv()["Layout"][i]
         if v["Type"] == "Category" then
             v["Drawings"]["Main"].Visible = active
             v["Drawings"]["Text"].Visible = active
@@ -228,11 +228,11 @@ function Library:Toggle()
 end
 
 function Library:PlaceUI()
-    local current_y = _G["Theme"]["UI_Position"].Y
-    for i = 1, #_G["Layout"] do
-        local v = _G["Layout"][i]
+    local current_y = getgenv()["Theme"]["UI_Position"].Y
+    for i = 1, #getgenv()["Layout"] do
+        local v = getgenv()["Layout"][i]
         if v["Type"] == "Toggle" or v["Type"] == "Slider" or v["Type"] == "Dropdown" or v["Type"] == "Keybind" then
-            local pos = v2(_G["Theme"]["UI_Position"].X+10, current_y)
+            local pos = v2(getgenv()["Theme"]["UI_Position"].X+10, current_y)
 
             local b = v["Drawings"]["Main"]
             local t = v["Drawings"]["Text"]
@@ -265,7 +265,7 @@ function Library:PlaceUI()
             b2.Size = v2(t2.TextBounds.X+margin*4, t2.TextBounds.Y+margin*2)
             t2.Position = v2(newpos.X+margin+t2.TextBounds.X/2, newpos.Y+margin)
         elseif v["Type"] == "Category" then
-            local pos = v2(_G["Theme"]["UI_Position"].X, current_y)
+            local pos = v2(getgenv()["Theme"]["UI_Position"].X, current_y)
 
             local b = v["Drawings"]["Main"]
             local t = v["Drawings"]["Text"]
@@ -276,7 +276,7 @@ function Library:PlaceUI()
             b.Size = v2(t.TextBounds.X+margin*4, t.TextBounds.Y+margin*2)
             t.Position = v2(pos.X+margin*2, pos.Y+margin)
         elseif v["Type"] == "Label" or v["Type"] == "Button" then
-            local pos = v2(_G["Theme"]["UI_Position"].X+10, current_y)
+            local pos = v2(getgenv()["Theme"]["UI_Position"].X+10, current_y)
 
             local b = v["Drawings"]["Main"]
             local t = v["Drawings"]["Text"]
@@ -287,7 +287,7 @@ function Library:PlaceUI()
             b.Size = v2(t.TextBounds.X+margin*4, t.TextBounds.Y+margin*2)
             t.Position = v2(pos.X+margin*2, pos.Y+margin)
         elseif v["Type"] == "Colorpicker" then
-            local pos = v2(_G["Theme"]["UI_Position"].X+10, current_y)
+            local pos = v2(getgenv()["Theme"]["UI_Position"].X+10, current_y)
 
             local b = v["Drawings"]["Main"]
             local t = v["Drawings"]["Text"]
@@ -316,7 +316,7 @@ function Library:PlaceUI()
     end
 end
 
-_G.Picker_Colors = {
+getgenv().Picker_Colors = {
     [1] = RGB(255, 0, 0),
     [2] = RGB(255, 136, 0),
     [3] = RGB(255, 255, 0),
@@ -340,9 +340,9 @@ _G.Picker_Colors = {
 function Library:Reset()
     Library:UpdateTheme()
     Library:PlaceUI()
-    n = #_G["Layout"]
+    n = #getgenv()["Layout"]
     for i = 1, n do
-        local v = _G["Layout"][i]
+        local v = getgenv()["Layout"][i]
         if i == selected then
             if v["Type"] == "Toggle" then
                 if v["ENABLED"] == true then
@@ -433,9 +433,9 @@ c = UIS.InputBegan:Connect(function(input, processed)
                 Library:Reset()
             end
             if input.KeyCode == Enum.KeyCode.Left or input.KeyCode == Enum.KeyCode.L then
-                n = #_G["Layout"]
+                n = #getgenv()["Layout"]
                 for i = 1, n do
-                    local v = _G["Layout"][i]
+                    local v = getgenv()["Layout"][i]
                     if i == selected then
                         if v["Type"] == "Toggle" then
                             v["ENABLED"] = not v["ENABLED"]
@@ -483,9 +483,9 @@ c = UIS.InputBegan:Connect(function(input, processed)
                 Library:Reset()
             end
             if input.KeyCode == Enum.KeyCode.Right or input.KeyCode == Enum.KeyCode.Quote then
-                n = #_G["Layout"]
+                n = #getgenv()["Layout"]
                 for i = 1, n do
-                    local v = _G["Layout"][i]
+                    local v = getgenv()["Layout"][i]
                     if i == selected then
                         if v["Type"] == "Button" then
                             v["CallBack"]()
@@ -535,7 +535,7 @@ c = UIS.InputBegan:Connect(function(input, processed)
                             v["Drawings"]["Extra"]["Text"].Text = replace
                             local c
                             c = UIS.InputBegan:Connect(function(input2)
-                                if DESTROY_GUI then
+                                if DESTROYgetgenv()UI then
                                     c:Disconnect()
                                 elseif input2.UserInputType == Enum.UserInputType.Keyboard then
                                     v["Keybind"] = input2.KeyCode
@@ -556,49 +556,49 @@ c = UIS.InputBegan:Connect(function(input, processed)
 end)
 spawn(function()
     while wait() do
-        if DESTROY_GUI then
+        if DESTROYgetgenv()UI then
             c:Disconnect()
         end
     end
 end)
 
 function Library:NewCategory(cat_name)
-    local val = #_G["Layout"]+1
+    local val = #getgenv()["Layout"]+1
     local new_y = GetNewYCoord()
-    _G["Layout"][val] = {
+    getgenv()["Layout"][val] = {
         ["Type"] = "Category",
-        ["Drawings"] = CreateTextBox(cat_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X, new_y), {Type = "Category"})
+        ["Drawings"] = CreateTextBox(cat_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X, new_y), {Type = "Category"})
     }
     Library:Reset()
 
     local cat_funcs = {}
 
     function cat_funcs:NewButton(op_name, CallBack)
-        local val = #_G["Layout"]+1
+        local val = #getgenv()["Layout"]+1
         local new_y = GetNewYCoord()
-        _G["Layout"][val] = {
+        getgenv()["Layout"][val] = {
             ["Type"] = "Button",
-            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X+10, new_y), {Type = "Button"}),
+            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X+10, new_y), {Type = "Button"}),
             ["CallBack"] = CallBack
         }
         Library:Reset()
     end
 
     function cat_funcs:NewToggle(op_name, default, CallBack)
-        local val = #_G["Layout"]+1
+        local val = #getgenv()["Layout"]+1
         local new_y = GetNewYCoord()
-        _G["Layout"][val] = {
+        getgenv()["Layout"][val] = {
             ["ENABLED"] = default,
             ["Type"] = "Toggle",
-            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X+10, new_y), {Type = "Toggle"}),
+            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X+10, new_y), {Type = "Toggle"}),
             ["CallBack"] = CallBack
         }
         Library:Reset()
         local toggle_funcs = {}
         function toggle_funcs:Toggle()
-            n = #_G["Layout"]
+            n = #getgenv()["Layout"]
             for i = 1, n do
-                local v = _G["Layout"][i]
+                local v = getgenv()["Layout"][i]
                 if v["Type"] == "Toggle" and i == val then
                     v["ENABLED"] = not v["ENABLED"]
                     v["CallBack"](v["ENABLED"])
@@ -611,9 +611,9 @@ function Library:NewCategory(cat_name)
 
     function cat_funcs:NewSlider(op_name, default, increment, min, max, decimal_places, suffix, CallBack)
         local suff = suffix or ""
-        local val = #_G["Layout"]+1
+        local val = #getgenv()["Layout"]+1
         local new_y = GetNewYCoord()
-        _G["Layout"][val] = {
+        getgenv()["Layout"][val] = {
             ["VALUE"] = default,
             ["Type"] = "Slider",
             ["Increment"] = increment,
@@ -621,19 +621,19 @@ function Library:NewCategory(cat_name)
             ["Max"] = max,
             ["Decimals"] = decimal_places,
             ["Suffix"] = suff,
-            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X+10, new_y), {Type = "Slider", Suffix = suff}),
+            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X+10, new_y), {Type = "Slider", Suffix = suff}),
             ["CallBack"] = CallBack
         }
         Library:Reset()
     end
 
     function cat_funcs:NewDropdown(op_name, options, default, CallBack)
-        local val = #_G["Layout"]+1
+        local val = #getgenv()["Layout"]+1
         local new_y = GetNewYCoord()
-        _G["Layout"][val] = {
+        getgenv()["Layout"][val] = {
             ["OPTIONS"] = options,
             ["Type"] = "Dropdown",
-            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X+10, new_y), {Type = "Dropdown"}),
+            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X+10, new_y), {Type = "Dropdown"}),
             ["Selected"] = default,
             ["CallBack"] = CallBack
         }
@@ -641,12 +641,12 @@ function Library:NewCategory(cat_name)
     end
 
     function cat_funcs:NewColorpicker(op_name, default, CallBack)
-        local val = #_G["Layout"]+1
+        local val = #getgenv()["Layout"]+1
         local new_y = GetNewYCoord()
-        _G["Layout"][val] = {
-            ["Colors"] = _G.Picker_Colors,
+        getgenv()["Layout"][val] = {
+            ["Colors"] = getgenv().Picker_Colors,
             ["Type"] = "Colorpicker",
-            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X+10, new_y), {Type = "Colorpicker", Color = default}),
+            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X+10, new_y), {Type = "Colorpicker", Color = default}),
             ["Selected"] = 1,
             ["CallBack"] = CallBack
         }
@@ -654,30 +654,30 @@ function Library:NewCategory(cat_name)
     end
 
     function cat_funcs:NewLabel(op_name)
-        local val = #_G["Layout"]+1
+        local val = #getgenv()["Layout"]+1
         local new_y = GetNewYCoord()
-        _G["Layout"][val] = {
+        getgenv()["Layout"][val] = {
             ["Type"] = "Label",
-            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X+10, new_y), {Type = "Label"})
+            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X+10, new_y), {Type = "Label"})
         }
         Library:Reset()
     end
 
     function cat_funcs:NewKeybind(op_name, default, CallBack)
-        local val = #_G["Layout"]+1
+        local val = #getgenv()["Layout"]+1
         local new_y = GetNewYCoord()
-        _G["Layout"][val] = {
+        getgenv()["Layout"][val] = {
             ["Type"] = "Keybind",
-            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), _G["Theme"]["Text_Size"], v2(_G["Theme"]["UI_Position"].X+10, new_y), {Type = "Keybind", Keybind = default}),
+            ["Drawings"] = CreateTextBox(op_name, RGB(10, 10, 10), 0.75, RGB(255, 255, 255), getgenv()["Theme"]["Text_Size"], v2(getgenv()["Theme"]["UI_Position"].X+10, new_y), {Type = "Keybind", Keybind = default}),
             ["Keybind"] = default,
             ["CallBack"] = CallBack
         }
         local c
         c = UIS.InputBegan:Connect(function(input, processed)
-            if DESTROY_GUI then
+            if DESTROYgetgenv()UI then
                 c:Disconnect()
             elseif not processed or (input.KeyCode == Enum.KeyCode.Up or input.KeyCode == Enum.KeyCode.Down or input.KeyCode == Enum.KeyCode.Left or input.KeyCode == Enum.KeyCode.Right) then
-                if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == _G["Layout"][val]["Keybind"] then
+                if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == getgenv()["Layout"][val]["Keybind"] then
                     CallBack()
                 end
             end
@@ -688,7 +688,7 @@ function Library:NewCategory(cat_name)
 end
 
 function Library:Kill()
-    for i, v in pairs(_G["Layout"]) do
+    for i, v in pairs(getgenv()["Layout"]) do
         v["Drawings"]["Main"]:Remove()
         v["Drawings"]["Text"]:Remove()
         if v["Type"] == "Toggle" or v["Type"] == "Slider" or v["Type"] == "Dropdown" or v["Type"] == "Keybind" then
@@ -700,7 +700,7 @@ function Library:Kill()
             v["Drawings"]["Extra"]["Preview"]:Remove()
         end
     end
-    DESTROY_GUI = true
-    _G["Layout"] = {}
+    DESTROYgetgenv()UI = true
+    getgenv()["Layout"] = {}
 end
 return Library
