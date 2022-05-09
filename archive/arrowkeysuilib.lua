@@ -130,7 +130,7 @@ local ContextActionService = game:GetService("ContextActionService")
 
 ContextActionService:BindActionAtPriority("DisableArrowKeys", function() return Enum.ContextActionResult.Sink end, false, Enum.ContextActionPriority.High.Value, unpack(Keys))
 
-local DESTROYgetgenv()UI = false
+local DESTROY_GUI = false
 
 getgenv()["Layout"] = {}
 
@@ -535,7 +535,7 @@ c = UIS.InputBegan:Connect(function(input, processed)
                             v["Drawings"]["Extra"]["Text"].Text = replace
                             local c
                             c = UIS.InputBegan:Connect(function(input2)
-                                if DESTROYgetgenv()UI then
+                                if DESTROY_GUI then
                                     c:Disconnect()
                                 elseif input2.UserInputType == Enum.UserInputType.Keyboard then
                                     v["Keybind"] = input2.KeyCode
@@ -556,7 +556,7 @@ c = UIS.InputBegan:Connect(function(input, processed)
 end)
 spawn(function()
     while wait() do
-        if DESTROYgetgenv()UI then
+        if DESTROY_GUI then
             c:Disconnect()
         end
     end
@@ -674,7 +674,7 @@ function Library:NewCategory(cat_name)
         }
         local c
         c = UIS.InputBegan:Connect(function(input, processed)
-            if DESTROYgetgenv()UI then
+            if DESTROY_GUI then
                 c:Disconnect()
             elseif not processed or (input.KeyCode == Enum.KeyCode.Up or input.KeyCode == Enum.KeyCode.Down or input.KeyCode == Enum.KeyCode.Left or input.KeyCode == Enum.KeyCode.Right) then
                 if input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == getgenv()["Layout"][val]["Keybind"] then
@@ -700,7 +700,6 @@ function Library:Kill()
             v["Drawings"]["Extra"]["Preview"]:Remove()
         end
     end
-    DESTROYgetgenv()UI = true
+    DESTROY_GUI = true
     getgenv()["Layout"] = {}
 end
-return Library
